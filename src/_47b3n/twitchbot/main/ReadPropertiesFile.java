@@ -5,20 +5,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class Commands {
+public class ReadPropertiesFile {
 	
-	public Commands() {
+	public ReadPropertiesFile() {
 		
 	}
 	
-	public String readProperties(String propName, String string) {
+	public String readProperties(String propName, String propertiesFilePath) {
 		Properties prop = new Properties();
 		InputStream input = null;
 		String return1 = null;
 		
 		try {
 			
-			input = new FileInputStream(string);
+			input = new FileInputStream(propertiesFilePath);
 			
 			prop.load(input);			
 

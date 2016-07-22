@@ -13,11 +13,13 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import org.jibble.pircbot.Colors;
 import org.jibble.pircbot.PircBot;
 
 public class Gui extends PircBot {
@@ -26,12 +28,14 @@ public class Gui extends PircBot {
 	public static JLabel messageLabel;
 	public static JTextField messageField;
 	
-	public static Commands cmd;
+	
+	
+	public static ReadPropertiesFile cmd;
 	
 	public Gui(String username) {	
 		this.setName(username);
 		this.isConnected();
-		cmd = new Commands();
+		cmd = new ReadPropertiesFile();
 	}
 	
 	public void messageSend(String message) {
@@ -40,7 +44,7 @@ public class Gui extends PircBot {
 	}
 	
 	public void gui() {		
-		JFrame frame = new JFrame("TwitchBot");
+		JFrame frame = new JFrame("TwitchEye");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(500, 500);
 		
@@ -55,6 +59,13 @@ public class Gui extends PircBot {
 	    }
 		
 		frame.setIconImage(image);	
+		
+		if(isConnected() == false) {
+			String[] options = {"Ok"};
+			JOptionPane.showOptionDialog(frame, "Can't connect to the chat!\nThis means that you are not connected to the internet or "
+					+ "\nyour information in files\\details.properties isn't right!", "Error", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, options, null);
+			System.exit(0);
+		}
 		
 		chatArea = new JTextArea();
 		chatArea.setEditable(false);
@@ -74,7 +85,7 @@ public class Gui extends PircBot {
 	    	
 	  		msg = messageField.getText();
 	  		if (msg.equalsIgnoreCase("/help")) {
-				openInBrowser(this.getClass().getClassLoader().getResource("files/site/index.html").toString());
+				openInBrowser(this.getClass().getClassLoader().getResource("https://github.com/47b3n/TwitchEye/wiki").toString());
 	  		} 
 	  		if (!msg.equalsIgnoreCase("/help")) {
 	  			messageSend(msg);
@@ -98,7 +109,7 @@ public class Gui extends PircBot {
 			String[] parts = message.split("!");
 			String msg = parts[1]; // 034556
 			if(cmd.readProperties(msg.toLowerCase(), "files/commands.properties") == null) {
-				sendMessage(channel, message + " is not an available command!");
+				sendMessage(Colors.RED + channel, message + " is not an available command!");
 			}
 			if(cmd.readProperties(msg.toLowerCase(), "files/commands.properties") != null) {
 				sendMessage(channel, cmd.readProperties(msg, "files/commands.properties"));
