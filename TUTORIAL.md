@@ -6,7 +6,8 @@ So the application works like this:
 command.properties file, your Twitch-account will respond to the Twitch-channel-chat
 with the response of this command.
 
-Explanation per step
+Explanation per step:
+
 1. To login to your Twitch account search for the details.properties file in 
 the folder settings. And open this file in your favorite text-editor. 
 After username= you type the username of the Twitch account you want to use. 
