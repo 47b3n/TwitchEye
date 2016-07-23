@@ -22,6 +22,8 @@ import javax.swing.SwingConstants;
 import org.jibble.pircbot.Colors;
 import org.jibble.pircbot.PircBot;
 
+import _47b3n.twitcheye.classes.ReadPropertiesFile;
+
 public class Gui extends PircBot {
 
 	public static JTextArea chatArea;

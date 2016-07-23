@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 
+import _47b3n.twitcheye.classes.ReadPropertiesFile;
+
 public class TwitchBot {
 
 	public static Gui bot;
