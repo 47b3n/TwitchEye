@@ -13,4 +13,5 @@ Explanation per step
 	To get this oAuth key make sure you are logged in on the Twitch account you want to use
 	on Twitch. Then you got to [this link](http://http://twitchapps.com/tmi/) and click
 	on 'Connect with Twitch' button. Then follow the steps and copy everything what
-	this photo says ![Photo1](https://github.com/47b3n/TwitchEye/blob/master/tutorial/twitchbot-oauthkey.png)
+	this photo says including the 'oauth:' part
+	![Photo1](https://github.com/47b3n/TwitchEye/blob/master/tutorial/twitchbot-oauthkey.png)
