@@ -1,5 +1,6 @@
 # How it works
 So the application works like this:
+
 1. You login with a Twitch account. 
 2. You can send messages to a certain Twitch-channel-chat with this Twitch account. 
 3. If a user in this Twitch-channel-chat enters a command which is listed as a command in your
