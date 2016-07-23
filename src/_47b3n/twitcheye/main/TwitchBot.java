@@ -8,7 +8,6 @@ import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 
 import _47b3n.twitcheye.classes.ReadPropertiesFile;
-import _47b3n.twitcheye.twitchapiwrapper.TwitchAPI;
 
 public class TwitchBot {
 
@@ -16,9 +15,7 @@ public class TwitchBot {
 	public static ReadPropertiesFile readPropertiesFile;
 	public static String username, oauth, channelname;
 
-	public static void main(String[] args) throws NickAlreadyInUseException, IOException, IrcException {
-		new TwitchAPI("i1vwtqwokv9av5qcz7qjtm66uo0dncw");
-		
+	public static void main(String[] args) throws NickAlreadyInUseException, IOException, IrcException {		
 		readPropertiesFile = new ReadPropertiesFile();
 
 		username = readPropertiesFile.readProperties("username", "settings/details.properties");

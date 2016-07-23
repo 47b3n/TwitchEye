@@ -19,10 +19,8 @@ import javax.swing.SwingConstants;
 
 import org.jibble.pircbot.PircBot;
 
-<<<<<<< HEAD:src/_47b3n/twitcheye/main/Gui.java
 import _47b3n.twitcheye.classes.OpenInBrowser;
-=======
->>>>>>> master:src/_47b3n/twitchbot/main/Gui.java
+
 import _47b3n.twitcheye.classes.ReadPropertiesFile;
 
 public class Gui extends PircBot {
