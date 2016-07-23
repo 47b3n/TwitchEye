@@ -19,11 +19,11 @@ on `Connect with Twitch` button. Then follow the steps and copy everything what
 this photo says including the `oauth:` part.
 ![Photo1](https://github.com/47b3n/TwitchEye/blob/master/tutorial/twitchbot-oauthkey.png)
 So after `oauth=` you paste that in.
-After `channel=` you type the channel you are streaming to. Now your done logging in!
+After `channel=` you type the channel you are streaming to. Now your done logging in! :tada:
 2. To type a message to the chat start the program and go to the bar where it says
 `Type here your message to the chat or type /help to learn more about this application.`
 Delete the text which is in this bar and type the message you want to type to your chat.
-When you typed your message press `enter`, then the message gets sent to the chat.
+When you typed your message press `enter`, then the message gets sent to the chat. :balloon:
 
 3. To add commands to your Twitch-channel-chat you have to go to `command.properties` 
 in the folder `settings`. And open this file in your favorite text-editor. A command is the word before the `=` sign.
