@@ -18,6 +18,7 @@ Then you got to [this link](http://http://twitchapps.com/tmi/) and click
 on 'Connect with Twitch' button. Then follow the steps and copy everything what
 this photo says including the 'oauth:' part.
 ![Photo1](https://github.com/47b3n/TwitchEye/blob/master/tutorial/twitchbot-oauthkey.png)
+
 So after oauth= you paste that in.
 After channel= you type the channel you are streaming to. Now your done logging in!
 2. To type a message to the chat start the program and go to the bar where it says
