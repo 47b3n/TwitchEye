@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -20,7 +20,6 @@ import javax.swing.SwingConstants;
 import org.jibble.pircbot.PircBot;
 
 import _47b3n.twitcheye.classes.OpenInBrowser;
-
 import _47b3n.twitcheye.classes.ReadPropertiesFile;
 
 public class Gui extends PircBot {
@@ -104,6 +103,9 @@ public class Gui extends PircBot {
 		if(message.toLowerCase().indexOf('!') >= 0) {
 			String[] parts = message.split("!");
 			String msg = parts[1];
+			if (getFileExist("settings/command.properties") == false) {
+				whenMessage("The command.properties file doesn't exist");
+			}
 			if(readPropertiesFile.readProperties(msg.toLowerCase(), "settings/commands.properties") == null) {
 				sendMessage(channel, message + " is not an available command!");
 			}
@@ -132,5 +134,13 @@ public class Gui extends PircBot {
 	
 	public static void whenMessage(String message) {
 		chatArea.append("[Log] " + message + "\n");
+	}
+	
+	public static boolean getFileExist(String filePathString) {
+		File f = new File(filePathString);
+		if(f.exists() && !f.isDirectory()) { 
+			return true;
+		}
+		return false;
 	}
 }
