@@ -24,27 +24,17 @@ import _47b3n.twitcheye.classes.ReadPropertiesFile;
 
 public class Gui extends PircBot {
 	
-	public static ReadPropertiesFile readPropertiesFile;
+	public static ReadPropertiesFile readPropertiesFile = new ReadPropertiesFile();
 
-	public static JFrame frame;
-	public static JTextArea chatArea;
-	public static JLabel copyrightLabel;
-	public static JTextField messageField;
+	public static JFrame frame = new JFrame("TwitchEye");
+	public static JTextArea chatArea = new JTextArea();
+	public static JLabel copyrightLabel = new JLabel("Copyright (c) 2016 - Ruben de Groot   ", SwingConstants.RIGHT);
+	public static JTextField messageField = new JTextField("Type here your message to the chat or type /help to learn more about this application.");
 	
 	
 	public Gui(String username) {
-		init();
 		this.setName(username);
 		this.isConnected();
-	}
-	
-	private void init() {
-		readPropertiesFile = new ReadPropertiesFile();	
-		
-		frame = new JFrame("TwitchEye");
-		chatArea = new JTextArea();
-		copyrightLabel = new JLabel("Copyright (c) 2016 - Ruben de Groot   ", SwingConstants.RIGHT);
-		messageField = new JTextField("Type here your message to the chat or type /help to learn more about this application.");
 	}
 	
 	private void setIconImage(String imgPath) {
@@ -78,12 +68,17 @@ public class Gui extends PircBot {
 	      {
 	    	String msg = messageField.getText();
 	    	
+	    	if(msg.equalsIgnoreCase("")) {
+	    		logMessage("You haven't typed anything!");
+	    	}
 	  		if (msg.equalsIgnoreCase("/help")) {
-				new OpenInBrowser("https://github.com/47b3n/TwitchEye/wiki");
+				new OpenInBrowser("https://github.com/47b3n/TwitchEye/TUTORIAL.md");
 	  		} 
-	  		if (!msg.equalsIgnoreCase("/help")) {
-	  			messageSend(msg);
+	  		if (!msg.equalsIgnoreCase("/help") && !msg.equalsIgnoreCase("")) {
+	  			sendMessage("#"+TwitchBot.channelname.toLowerCase(), msg);
+	  			chatArea.append("["+getName().toLowerCase()+"] " + msg + "\n");
 	  		}
+	  		messageField.setText("");
 	      }
 	    });
 		
@@ -98,20 +93,20 @@ public class Gui extends PircBot {
 	
 	@Override
 	public void onMessage(String channel, String sender, String login, String hostname, String message) {
-		chatArea.append("["+sender+"] " + message + "\n");
+		chatArea.append("["+sender.toLowerCase()+"] " + message + "\n");
 		
 		if(message.toLowerCase().indexOf('!') >= 0) {
 			String[] parts = message.split("!");
 			String msg = parts[1];
 			if (getFileExist("settings/command.properties") == false) {
-				whenMessage("The command.properties file doesn't exist");
+				logMessage("The command.properties file doesn't exist");
 			}
 			if(readPropertiesFile.readProperties(msg.toLowerCase(), "settings/commands.properties") == null) {
 				sendMessage(channel, message + " is not an available command!");
 			}
 			if(readPropertiesFile.readProperties(msg.toLowerCase(), "settings/commands.properties") != null) {
-				sendMessage(channel, readPropertiesFile.readProperties(msg, "files/commands.properties"));
-				whenMessage(readPropertiesFile.readProperties(msg, "settings/commands.properties"), TwitchBot.username);
+				sendMessage(channel, readPropertiesFile.readProperties(msg, "settings/commands.properties"));
+				chatArea.append("["+sender.toLowerCase()+"] " + readPropertiesFile.readProperties(msg, "settings/commands.properties") + "\n");
 			}
 			return;
 		}
@@ -120,19 +115,14 @@ public class Gui extends PircBot {
 	
 	@Override
 	public void onConnect() {
-		whenMessage("Succesfully connected to chat server!");
-	}
-	
-	public void messageSend(String message) {
-		sendMessage("#"+TwitchBot.channelname.toLowerCase(), message);
-		whenMessage(message, getName());
+		logMessage("Succesfully connected to chat server!");
 	}
 
 	public static void whenMessage(String message, String sender) {
-		chatArea.append("["+sender+"] " + message + "\n");
+		chatArea.append("["+sender.toLowerCase()+"] " + message + "\n");
 	}
 	
-	public static void whenMessage(String message) {
+	public static void logMessage(String message) {
 		chatArea.append("[Log] " + message + "\n");
 	}
 	
